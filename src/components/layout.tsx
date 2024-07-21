@@ -1,5 +1,4 @@
 import React, { type ReactNode } from "react";
-
 import Link from "next/link";
 import { Button } from "~/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "~/components/ui/sheet";
@@ -8,11 +7,9 @@ import {
   SignedOut,
   SignInButton,
   SignedIn,
-  useUser,
   SignOutButton,
 } from "@clerk/nextjs";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
-
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -20,6 +17,7 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
 } from "~/components/ui/dropdown-menu";
+import { useUserContext } from "~/context/UserContext";
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
@@ -34,7 +32,7 @@ export default function Layout({ children }: { children: ReactNode }) {
 }
 
 const Navbar = () => {
-  const { user } = useUser();
+  const { user } = useUserContext();
   return (
     <header className="absolute top-0 z-20 flex h-16 w-full items-center justify-between gap-4 border-b bg-white px-4 md:px-6">
       <Link href="/" className="flex items-center gap-2" prefetch={false}>
@@ -55,7 +53,14 @@ const Navbar = () => {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Avatar className="h-9 w-9">
-                <AvatarImage src={user?.imageUrl} alt="avatar" />
+                <AvatarImage
+                  src={
+                    user?.custom_picture_url ??
+                    user?.profile_picture_url ??
+                    undefined
+                  }
+                  alt="avatar"
+                />
                 <AvatarFallback>JD</AvatarFallback>
                 <span className="sr-only">Toggle user menu</span>
               </Avatar>
@@ -152,7 +157,14 @@ const Navbar = () => {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Avatar className="h-9 w-9">
-                    <AvatarImage src={user?.imageUrl} alt="avatar" />
+                    <AvatarImage
+                      src={
+                        user?.custom_picture_url ??
+                        user?.profile_picture_url ??
+                        undefined
+                      }
+                      alt="avatar"
+                    />
                     <AvatarFallback>JD</AvatarFallback>
                     <span className="sr-only">Toggle user menu</span>
                   </Avatar>

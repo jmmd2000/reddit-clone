@@ -17,6 +17,7 @@ model User {
   last_name                 String?
 //   friendcode                String        @unique
   profile_picture_url       String?
+  custom_picture_url        String?
   created_at                DateTime      @default(now())
   updated_at                DateTime      @updatedAt
   created_posts             Post[]

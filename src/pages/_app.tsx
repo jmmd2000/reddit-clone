@@ -5,13 +5,16 @@ import { api } from "~/utils/api";
 
 import "~/styles/globals.css";
 import Layout from "~/components/layout";
+import { UserProvider } from "~/context/UserContext";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
     <ClerkProvider {...pageProps}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <UserProvider>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </UserProvider>
     </ClerkProvider>
   );
 };

@@ -57,7 +57,7 @@ export default function Home() {
           <SignOutButton />
         </SignedIn> */}
         <UploadButton
-          endpoint="imageUploader"
+          endpoint="profilePictureUploader"
           onClientUploadComplete={(res) => {
             // Do something with the response
             console.log("Files: ", res);
