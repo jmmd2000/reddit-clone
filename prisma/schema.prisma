@@ -19,4 +19,14 @@ model User {
   profile_picture_url       String?
   created_at                DateTime      @default(now())
   updated_at                DateTime      @updatedAt
+  created_posts             Post[]
+}
+
+model Post {
+  id                        Int           @id @default(autoincrement())
+  user_id                   Int
+  user                      User          @relation(fields: [user_id], references: [id])
+  content                   String
+  created_at                DateTime      @default(now())
+  updated_at                DateTime      @updatedAt
 }

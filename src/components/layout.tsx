@@ -25,9 +25,9 @@ export default function Layout({ children }: { children: ReactNode }) {
   return (
     <>
       <Navbar />
-      <main>
+      <main className="flex pt-16">
         <Sidebar />
-        {children}
+        <div className="flex-grow">{children}</div>
       </main>
     </>
   );
@@ -45,7 +45,7 @@ const Navbar = () => {
         <SignedOut>
           <Link
             href=""
-            className="bg-primary text-primary-foreground hover:bg-primary/90 focus-visible:ring-ring inline-flex h-9 items-center justify-center rounded-md px-4 py-2 text-sm font-medium shadow transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50"
+            className="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
             prefetch={false}
           >
             <SignInButton forceRedirectUrl={"/?signedIn=true"} />
@@ -73,7 +73,7 @@ const Navbar = () => {
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <Link
-                  href="#"
+                  href="/settings"
                   className="flex items-center gap-2"
                   prefetch={false}
                 >
@@ -142,7 +142,7 @@ const Navbar = () => {
             <SignedOut>
               <Link
                 href=""
-                className="bg-primary text-primary-foreground hover:bg-primary/90 focus-visible:ring-ring inline-flex h-9 items-center justify-center rounded-md px-4 py-2 text-sm font-medium shadow transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50"
+                className="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
                 prefetch={false}
               >
                 <SignInButton forceRedirectUrl={"/?signedIn=true"} />
@@ -203,7 +203,8 @@ const Navbar = () => {
 
 const Sidebar = () => {
   return (
-    <aside className="absolute left-0 z-10 hidden h-full w-64 flex-col gap-4 border-r px-4 py-6 pt-20 lg:flex">
+    // <aside className="absolute left-0 z-10 hidden h-full w-64 flex-col gap-4 border-r px-4 py-6 lg:flex">
+    <aside className="hidden h-[calc(100vh-64px)] w-64 flex-col gap-4 border-r px-4 py-6 lg:flex">
       <nav className="flex flex-col gap-4">
         <Link
           href="#"

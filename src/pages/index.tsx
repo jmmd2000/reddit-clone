@@ -1,14 +1,15 @@
 import { useUser } from "@clerk/nextjs";
 import Head from "next/head";
-import {
-  SignInButton,
-  SignOutButton,
-  SignedIn,
-  SignedOut,
-} from "@clerk/nextjs";
+// import {
+//   SignInButton,
+//   SignOutButton,
+//   SignedIn,
+//   SignedOut,
+// } from "@clerk/nextjs";
 import { useEffect } from "react";
 import { api } from "~/utils/api";
 import { useRouter } from "next/router";
+import { UploadButton } from "~/utils/uploadthing";
 
 export default function Home() {
   // Auth data from Clerk
@@ -48,13 +49,26 @@ export default function Home() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="flex min-h-screen flex-col items-center justify-center">
-        <SignedOut>
+      <main className="flex flex-col items-center justify-center">
+        {/* <SignedOut>
           <SignInButton forceRedirectUrl={"/?signedIn=true"} />
         </SignedOut>
         <SignedIn>
           <SignOutButton />
-        </SignedIn>
+        </SignedIn> */}
+        <UploadButton
+          endpoint="imageUploader"
+          onClientUploadComplete={(res) => {
+            // Do something with the response
+            console.log("Files: ", res);
+            alert("Upload Completed");
+          }}
+          onUploadError={(error: Error) => {
+            // Do something with the error.
+            alert(`ERROR! ${error.message}`);
+          }}
+          className="ut-button:bg-slate-100 ut-button:text-slate-900 ut-button:hover:bg-slate-200 ut-button:rounded-md ut-button:text-sm ut-button:font-medium ut-button:shadow ut-button:transition-colors ut-button:focus-visible:outline-none ut-button:focus-visible:ring-1 ut-button:disabled:pointer-events-none ut-button:disabled:opacity-50 ut-button:px-4 ut-button:py-2"
+        />
       </main>
     </>
   );
